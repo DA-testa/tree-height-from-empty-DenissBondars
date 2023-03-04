@@ -10,7 +10,6 @@ def compute_height(n, parents):
     # Your code here
     max_height = 0
     height_storage = n * [0]
-    current_height = 0
 
     for i in range(n):
         if height_storage[i] == 0:
@@ -18,15 +17,16 @@ def compute_height(n, parents):
             edge = i
             while parents[edge] != -1:
                 edge = parents[edge]
-                if height_storage == 0:
+                if height_storage[edge] == 0:
                     current_height = current_height + 1
                 else:
                     current_height = current_height + height_storage[edge]
+                    break
             height_storage[i] = current_height
         else:
             current_height = height_storage[i]
-    if current_height > max_height:
-        max_height = current_height
+        if current_height > max_height:
+            max_height = current_height
     return max_height
 
 
