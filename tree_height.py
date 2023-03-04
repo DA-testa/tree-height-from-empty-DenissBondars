@@ -7,31 +7,26 @@ import numpy
 
 def compute_height(n, parents):
     # Write this function
-    max_height = 0
     # Your code here
-    roots = np.argwhere(parents == -1).item()
-    sort_out = np.array([roots])
-    keep_track_head = 0
-    keep_track_back = 1
+    max_height = 0
+    height_storage = n * [0]
+    current_height = 0
 
-    tested_elements = np.empty(n, dtype=bool)
-    count_height = np.empty(n, dtype=int)
-    
-    tested_elements[roots] = True
-    count_height[roots] = 1
-
-    while keep_track_head < keep_track_back:
-        current_element = sort_out[keep_track_head]
-        keep_track_head = keep_track_head + 1
-        descendants = np.flatnonzero(parents == current_element)
-        for i in descendants:
-            tested_elements[i] = True
-            count_height[i] = count_height[i] + 1
-            sort_out = np.append(sort_out, i)
-            keep_track_back = keep_track_back + 1
-        
-    max_height = np.max(count_height)
-
+    for i in range(n):
+        if height_storage[i] == 0:
+            current_height = 1
+            edge = i
+            while parents[edge] != -1:
+                edge = parents[edge]
+                if height_storage == 0:
+                    current_height = current_height + 1
+                else:
+                    current_height = current_height + height_storage[edge]
+            height_storage[i] = current_height
+        else:
+            current_height = height_storage[i]
+    if current_height > max_height:
+        max_height = current_height
     return max_height
 
 
@@ -48,16 +43,18 @@ def main():
     if "I" in FI:
         n = int(input())
         parents = input()
-        parents = np.array(parents.split(), dtype = int)
+        parents = parents.split()
+        parents = [int(i) for i in parents]
     if "F" in FI:
-        a_test = input()
-        test_file = "/workspaces/tree-height-from-empty-DenissBondars/test/" + a_test
-        if "a" in a_test:
+        test = input()
+        test_file = "/workspaces/tree-height-from-empty-DenissBondars/test/" + test
+        if "a" in test:
             return
         else:
             with open(test_file) as file:
                 n = int(file.readline())
-                parents = np.array(file.readline().split(), dtype = int)
+                parents = file.readline().split()
+                parents = [int(i) for i in parents]
     result = compute_height(n, parents)
     print(result)
 
