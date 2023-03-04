@@ -21,7 +21,6 @@ def compute_height(n, parents):
                     current_height = current_height + 1
                 else:
                     current_height = current_height + height_storage[edge]
-                    break
             height_storage[i] = current_height
         else:
             current_height = height_storage[i]
