@@ -52,9 +52,10 @@ def main():
         if "a" in test_file:
             return
         else:
-            n = int(test_file.readline())
-            parents = test_file.readline()
-            parents = np.array(parents.split(), dtype = int)
+            with open(test_file, 'r') as f:
+                n = int(f.readline())
+                parents = f.readline()
+                parents = np.array(parents.split(), dtype = int)
     result = compute_height(n, parents)
     print(result)
     pass
