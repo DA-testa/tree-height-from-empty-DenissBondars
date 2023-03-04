@@ -42,23 +42,24 @@ def main():
     # input number of elements
     # input values in one variable, separate with space, split these values in an array
     # call the function and output it's result
+    n = 0
+    parents = 0
     FI = input()
     if "I" in FI:
         n = int(input())
         parents = input()
         parents = np.array(parents.split(), dtype = int)
     if "F" in FI:
-        test_file = input()
-        if "a" in test_file:
+        a_test = input()
+        test_file = "/workspaces/tree-height-from-empty-DenissBondars/test/" + a_test
+        if "a" in a_test:
             return
         else:
-            with open(test_file, 'r') as f:
-                n = int(f.readline())
-                parents = f.readline()
-                parents = np.array(parents.split(), dtype = int)
+            with open(test_file) as file:
+                n = int(file.readline())
+                parents = np.array(file.readline().split(), dtype = int)
     result = compute_height(n, parents)
     print(result)
-    pass
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
