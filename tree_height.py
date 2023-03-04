@@ -47,7 +47,7 @@ def main():
         parents = [int(i) for i in parents]
     if "F" in FI:
         test = input()
-        test_file = "/workspaces/tree-height-from-empty-DenissBondars/test/" + test
+        test_file = "test/" + test
         if "a" in test:
             return
         else:
